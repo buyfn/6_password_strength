@@ -1,6 +1,6 @@
 # Password Strength Calculator
 
-[TODO. There will be project description]
+Script asks you to enter a password and then proceeds to rate strength of the password on a scale from 1 to 10.
 
 # Project Goals
 
