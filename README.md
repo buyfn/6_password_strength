@@ -19,14 +19,17 @@ Script estimates password strength based on it's length and the characters it co
 
 ### Password length
 
-Passwords shorter than 7 characters get 1 point. Passwords of length between 7 and 10 get 2 points. Passwords longer than 10 characters get 4 points.
+Long password get more points than short ones:
+- less than 7 characters - 1 point,
+- 7-10 characters - 2 points,
+- more than 10 characters - 4 points.
 
 ### Requirements
 
 Passwords get additional 2 points for meeting each of the following requirements:
 - password contains both uppercase and lowercase characters,
 - contains both letters and digits,
-- contains any of special characters, such as "!@#$%^&*".
+- contains any of special characters !@#$%^&*
 
 ### Prohibited passwords
 
