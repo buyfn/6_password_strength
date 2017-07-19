@@ -20,8 +20,8 @@ def load_blacklist():
         return file_handler.read().split()
 
 
-def contains_any(s, charset):
-    for char in s:
+def contains_any(target_string, charset):
+    for char in target_string:
         if char in charset:
             return True
     return False
