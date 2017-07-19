@@ -38,8 +38,8 @@ def contains_digit_and_letter(password):
 
 
 def contains_special(password):
-    SPECIAL_CHARS = "!@#$%^&*"
-    return contains_any(password, SPECIAL_CHARS)
+    special_chars = "!@#$%^&*"
+    return contains_any(password, special_chars)
 
 
 def is_date(password):
@@ -64,12 +64,13 @@ def is_license_plate(password):
     return any([matches(pattern) for pattern in patterns])
 
 
-def get_password_strength(password, blacklist=[]):
-    def prohibited(password):
-        return any([password in blacklist,
-                    is_date(password),
-                    is_license_plate(password)])
+def prohibited(password, blacklist):
+    return any([password in blacklist,
+                is_date(password),
+                is_license_plate(password)])
 
+
+def get_password_strength(password, blacklist=[]):
     strength = 1
 
     # points for length
@@ -86,7 +87,7 @@ def get_password_strength(password, blacklist=[]):
         if rule(password):
             strength += 2
 
-    if prohibited(password):
+    if prohibited(password, blacklist):
         return 1
     else:
         return min(10, strength)
