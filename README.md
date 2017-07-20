@@ -24,7 +24,7 @@ Long password get more points than short ones:
 - 7-10 characters - 2 points,
 - more than 10 characters - 4 points.
 
-### Requirements
+### Password requirements
 
 Passwords get additional 2 points for meeting each of the following requirements:
 - password contains both uppercase and lowercase characters,
