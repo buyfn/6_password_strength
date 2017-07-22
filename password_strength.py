@@ -73,7 +73,8 @@ def prohibited(password, blacklist):
 
 
 def get_password_strength(password, blacklist=None):
-    strength = 1
+    min_strength = strength = 1
+    max_strength = 10
 
     # points for length
     if len(password) > 10:
@@ -93,7 +94,7 @@ def get_password_strength(password, blacklist=None):
     if prohibited(password, (blacklist if blacklist else [])):
         return 1
     else:
-        return min(10, strength)
+        return min(max_strength, strength)
 
 
 if __name__ == '__main__':
