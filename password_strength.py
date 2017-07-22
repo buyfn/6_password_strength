@@ -2,6 +2,7 @@ import string
 import re
 import os
 import sys
+import getpass
 
 from dateutil.parser import parse
 
@@ -12,10 +13,11 @@ def load_blacklist():
     try:
         filepath = os.path.join(current_directory, sys.argv[1])
     except IndexError:
-        return []
+        return None
 
     if not os.path.exists(filepath):
-        return []
+        return None
+    
     with open(filepath, 'r') as file_handler:
         return file_handler.read().split()
 
@@ -70,7 +72,7 @@ def prohibited(password, blacklist):
                 is_license_plate(password)])
 
 
-def get_password_strength(password, blacklist=[]):
+def get_password_strength(password, blacklist=None):
     strength = 1
 
     # points for length
@@ -80,14 +82,15 @@ def get_password_strength(password, blacklist=[]):
         strength = 2
 
     # points for passing requirements
+    points_for_rule = 2
     rules = [contains_upper_and_lower,
              contains_digit_and_letter,
              contains_special]
     for rule in rules:
         if rule(password):
-            strength += 2
+            strength += points_for_rule
 
-    if prohibited(password, blacklist):
+    if prohibited(password, (blacklist if blacklist else [])):
         return 1
     else:
         return min(10, strength)
@@ -95,6 +98,6 @@ def get_password_strength(password, blacklist=[]):
 
 if __name__ == '__main__':
     blacklist = load_blacklist()
-    password = input('Enter a password: ')
+    password = getpass.getpass('Enter a password: ')
     print('Password strength: {}'.format(get_password_strength(password,
                                                                blacklist)))
